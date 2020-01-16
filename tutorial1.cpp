@@ -1,3 +1,4 @@
+//cvtColor함수, at으로 픽셀 접근하기.
 #include <iostream>
 #include <opencv2/opencv.hpp>
 using namespace std;
