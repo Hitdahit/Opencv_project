@@ -1,4 +1,4 @@
-//cvtColor함수, at으로 픽셀 접근하기.
+//Mat 개념, 이미지 읽기, 이미지 캡션 지정, 이미지 출력
 #include <iostream>
 #include <opencv2/opencv.hpp>
 using namespace std;
