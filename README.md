@@ -10,7 +10,8 @@
   * I want to study about Real Time Issue in object detection Problem. This is why I'm doing this project.
 
     ### Here is sample image of my project.
-    
+    ![Screenshot from 2020-01-24 23-35-22](https://user-images.githubusercontent.com/42925197/73077399-70508b80-3f03-11ea-85fa-f2a6351760d5.png)
+
 ---
 
 
