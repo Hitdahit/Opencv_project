@@ -8,6 +8,7 @@
 * original picture
 ![original](https://user-images.githubusercontent.com/42925197/73737255-a30d4600-4785-11ea-9e01-e0fa68d39e7e.PNG)
 
+### recognition.cpp 
 * grayscale
 ![grayscale](https://user-images.githubusercontent.com/42925197/73737259-a3a5dc80-4785-11ea-8fa5-e7c0c341d574.PNG)
 
@@ -16,6 +17,12 @@
 
 * canny(with gaussian) & color(white, yellow) algorithm 
 ![canny+color](https://user-images.githubusercontent.com/42925197/73737260-a3a5dc80-4785-11ea-945a-1227453d4018.PNG)
+---
+### color_strategy.cpp
+* results
+![image](https://user-images.githubusercontent.com/42925197/73838848-f51e9c00-4857-11ea-8db5-0a0f0a8b9b02.png)
+![image](https://user-images.githubusercontent.com/42925197/73838959-38790a80-4858-11ea-8431-252bcd456d9a.png)
+  * so obvious pros and cons
 
 ---
 ## Open_YOLO Project summary
