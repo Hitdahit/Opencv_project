@@ -1,0 +1,101 @@
+#include <opencv2/opencv.hpp>
+using namespace std;
+using namespace cv;
+Mat roi(Mat srcImg)
+{
+	Mat mask;
+	Scalar color;
+	if (srcImg.channels() == 3) {
+		mask = Mat::zeros(srcImg.rows, srcImg.cols, CV_8UC3);   //src와 같은 크기의 빈이미지
+		color = Scalar(255, 255, 255);
+	}
+	else {
+		mask = Mat::zeros(srcImg.rows, srcImg.cols, CV_8UC3);
+		color = 255;
+	}
+
+	int height = srcImg.rows;
+	int width = srcImg.cols;
+
+	Point vertices[1][4];
+	vertices[0][0] = Point(0, height);
+	vertices[0][1] = Point(0, height / 2 + 60);
+	vertices[0][2] = Point(width, height / 2 + 60);
+	vertices[0][3] = Point(width, height);
+
+	const Point* ppt[1] = { vertices[0] };
+	int npt[] = { 4 };
+
+	fillPoly(mask, ppt, npt, 1, color);
+
+	Mat ROI = srcImg & mask;
+	
+	return ROI;
+
+}
+Mat mark_img(Mat srcImg,int blue_thres=200, int green_thres=200, int red_thres=200)
+{
+	int bgr_thres[3] = { blue_thres, green_thres, red_thres };
+
+	for (int i = 0; i < srcImg.rows; i++) {
+		for (int j = 0; j < srcImg.cols; j++) {
+			if (srcImg.at<Vec3b>(i, j)[0] < bgr_thres[0]
+				&& srcImg.at<Vec3b>(i, j)[1] < bgr_thres[1]
+				&& srcImg.at<Vec3b>(i, j)[2] < bgr_thres[2]
+				) {
+				srcImg.at<Vec3b>(i, j)[0] = 0;
+				srcImg.at<Vec3b>(i, j)[1] = 0;
+				srcImg.at<Vec3b>(i, j)[2] = 0;
+			}
+		}
+	}
+	return srcImg;
+
+}
+Mat result_img(Mat srcImg, Mat mark)
+{
+	for (int i = 0; i < srcImg.rows; i++) {
+		for (int j = 0; j < srcImg.cols; j++) {
+			
+			if (mark.at<Vec3b>(i, j)[0] > 200
+				&& mark.at<Vec3b>(i, j)[1] > 200
+				&& mark.at<Vec3b>(i, j)[2] > 200) {
+				srcImg.at<Vec3b>(i, j)[0] = 0;
+				srcImg.at<Vec3b>(i, j)[1] = 0;
+				srcImg.at<Vec3b>(i, j)[2] = 255;
+			}
+		}
+	}
+	return srcImg;
+}
+int main()
+{
+	Mat srcImg = imread("road.jpg");
+	Mat origin = imread("road.jpg");
+	int height = srcImg.rows;
+	int width = srcImg.cols;
+
+	//erase trivial region
+	Point vertices[1][4];
+	vertices[0][0] = Point(0, 0);
+	vertices[0][1] = Point(0, height / 2 + 60);
+	vertices[0][2] = Point(width, height / 2 + 60);
+	vertices[0][3] = Point(width, 0);
+
+	const Point* ppt[1] = { vertices[0] };
+	int npt[] = { 4 };
+
+	fillPoly(srcImg, ppt, npt, 1, Scalar(0,0,0));
+
+
+	
+	Mat roi_img = roi(srcImg);
+
+	Mat	mark = mark_img(srcImg);
+
+	Mat res = result_img(origin, mark);
+
+	imshow("res", res);
+	waitKey();
+	return 0;
+}
