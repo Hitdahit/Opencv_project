@@ -16,14 +16,16 @@ Mat roi(Mat srcImg)
 	int height = srcImg.rows;
 	int width = srcImg.cols;
 
-	Point vertices[1][4];
+	Point vertices[1][6];
 	vertices[0][0] = Point(0, height);
-	vertices[0][1] = Point(0, height / 2);
-	vertices[0][2] = Point(width, height / 2);
-	vertices[0][3] = Point(width, height);
+	vertices[0][1] = Point(0, height*7/8);
+	vertices[0][2] = Point(width/4, height*7/ 11);
+	vertices[0][3] = Point(width*6/7, height*7 / 11);
+	vertices[0][4] = Point(width, height*7/8);
+	vertices[0][5] = Point(width, height);
 
 	const Point* ppt[1] = { vertices[0] };
-	int npt[] = { 4 };
+	int npt[] = { 6 };
 
 	if (srcImg.channels() == 3) {
 		mask = Mat::zeros(srcImg.rows, srcImg.cols, CV_8UC3);   //src와 같은 크기의 빈이미지
@@ -87,10 +89,38 @@ Mat mask(Mat hsvImg)
 	//imshow("")
 	imshow("white", white_line);
 	imshow("yellow", yellow_line);
-	return	wy_line;
+	return	white_line;
 
 
 
+}
+void clustering(Mat white_line)
+{
+	int mid = white_line.cols / 2;
+	for (int i = 0; i < white_line.rows; i++) {
+		for (int j = 0; j < white_line.cols; j++) {
+			if (white_line.at<uchar>(i, j)) {
+				if (j < mid) white1.push_back(make_pair(i, j));
+				else white2.push_back(make_pair(i, j));
+			}
+		}
+	}
+	cout << white1.size();
+}
+//클러스터링 테스트 용
+
+void test_cluster(Mat srcImg)
+{
+	int idx = 0;
+	for (int i = 0; i < srcImg.rows; i++) {
+		for (int j = 0; j < srcImg.cols; j++) {
+			if (idx < white2.size() && white2[idx].first == i && white2[idx].second == j) {
+				srcImg.at<Vec3b>(i, j) = Vec3b(0, 0, 255);
+				idx++;
+			}
+		}
+	}
+	imshow("test", srcImg);
 }
 
 //HSV 색 공간은 색을 표현하는 하나의 방법이자, 그 방법에 따라 색을 배치하는 방식이다. 색상(Hue), 채도(Saturation), 명도(Value)의 좌표를 써서 특정한 색을 지정한다.
@@ -101,17 +131,23 @@ int main()
 	Mat srcImg = imread("road3.png");  //hsv 명도 채도 ???를 써서 검출 (노란색 흰색 차선 검출 따로시키기 위해)
 	Mat origin = srcImg.clone();
 	
-	if (srcImg.empty())return -1;
-	imshow("src", srcImg);
+	if (srcImg.empty()) {
+		cerr << "invalid file";
+		return -1;
+	}
 	
 	Mat hsvImg;
 	cvtColor(srcImg, hsvImg, COLOR_BGR2HSV);
+	Mat roi_hsv = roi(hsvImg);
 
-	Mat	white_line = mask(hsvImg);
+	Mat	white_line = mask(roi_hsv);
+
+	clustering(white_line);
+
+	//테스트
+	test_cluster(origin);
 	
-	white_line = roi(white_line);
-	
-	imshow("res", white_line);
+	//imshow("res", white_line);
 	waitKey();
 	return 0;
 }
