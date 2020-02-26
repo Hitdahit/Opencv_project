@@ -9,15 +9,21 @@
 
 check original img and result img.
 * gather lane's points 
+
 ![image](https://user-images.githubusercontent.com/42925197/75315771-fa936300-58a6-11ea-90f9-56c6a9d05825.png)
 
 * left_lane ransac
+
 ![image](https://user-images.githubusercontent.com/42925197/75315692-bacc7b80-58a6-11ea-929f-c536cb8aed2a.png)
 
 * full ransac and find_route to drive through
+
 ![image](https://user-images.githubusercontent.com/42925197/75315790-0848e880-58a7-11ea-9373-e495643f28e4.png)
-  * caution: you may be need to edit roi function's vertices array in _.cpp, because ransac malfunctions
-  #### if input img contains strange object which is not road.   (but it typially works.)
+  * caution: you may be need to edit roi function's vertices array in _.cpp, reason followed under this line.
+  #### ransac malfunctions if input img contains strange object which is not road.   (but it typially works.)
+  
+  * This program's input is still img. I will revise it so this project use video as a input.
+  * _.cpp will be refactorzied soon.
 ---
 ## Open_YOLO Project summary
 * I will construct YOLO network in C++, to make object detector in video files.
