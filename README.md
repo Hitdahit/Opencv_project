@@ -2,28 +2,22 @@
 ---
 * I'll upload (opencv tutorial code + comments) and my project using opencv.
 ## Lane Recognition Project
-* This project will be written with C++. 
-* From now on, this project's strategy is using lane's color(which is typically white and yellow) and canny function as a ready for Hough Transform.
-* I will develop this project with my own insights. Progress will be written in here.
-* original picture
-![original](https://user-images.githubusercontent.com/42925197/73737255-a30d4600-4785-11ea-9e01-e0fa68d39e7e.PNG)
+* This project will be written with C++. and you should use _.cpp.
+* rest of cpp files are my trial and errors, so i don't recommand you to use them.
+* this project's strategy is using lane's color(which is typically white and yellow) transformed to hsvColor.
+* after i croped lane's points with color strategy, I will use ransac algorithm.
 
-### recognition.cpp 
-* grayscale
-![grayscale](https://user-images.githubusercontent.com/42925197/73737259-a3a5dc80-4785-11ea-8fa5-e7c0c341d574.PNG)
+check original img and result img.
+* gather lane's points 
+![image](https://user-images.githubusercontent.com/42925197/75315771-fa936300-58a6-11ea-90f9-56c6a9d05825.png)
 
-* gaussian filtered grayscale
-![gauss](https://user-images.githubusercontent.com/42925197/73737257-a30d4600-4785-11ea-9b8a-a68a689cce7b.PNG)
+* left_lane ransac
+![image](https://user-images.githubusercontent.com/42925197/75315692-bacc7b80-58a6-11ea-929f-c536cb8aed2a.png)
 
-* canny(with gaussian) & color(white, yellow) algorithm 
-![canny+color](https://user-images.githubusercontent.com/42925197/73737260-a3a5dc80-4785-11ea-945a-1227453d4018.PNG)
----
-### color_strategy.cpp
-* results
-![image](https://user-images.githubusercontent.com/42925197/73838848-f51e9c00-4857-11ea-8db5-0a0f0a8b9b02.png)
-![image](https://user-images.githubusercontent.com/42925197/73838959-38790a80-4858-11ea-8431-252bcd456d9a.png)
-  * so obvious pros and cons
-
+* full ransac and find_route to drive through
+![image](https://user-images.githubusercontent.com/42925197/75315790-0848e880-58a7-11ea-9373-e495643f28e4.png)
+  * caution: you may be need to edit roi function's vertices array in _.cpp, because ransac malfunctions
+  #### if input img contains strange object which is not road.   (but it typially works.)
 ---
 ## Open_YOLO Project summary
 * I will construct YOLO network in C++, to make object detector in video files.
