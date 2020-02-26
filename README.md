@@ -2,7 +2,7 @@
 ---
 * I'll upload (opencv tutorial code + comments) and my project using opencv.
 ## Lane Recognition Project
-* This project will be written with C++. and you should use _.cpp.
+* This project will be written with C++. and you should use hsv_ransac_ver-0.cpp.
 * rest of cpp files are my trial and errors, so i don't recommand you to use them.
 * this project's strategy is using lane's color(which is typically white and yellow) transformed to hsvColor.
 * after i croped lane's points with color strategy, I will use ransac algorithm.
@@ -23,7 +23,7 @@ check original img and result img.
   #### ransac malfunctions if input img contains strange object which is not road.   (but it typially works.)
   
   * This program's input is still img. I will revise it so this project use video as a input.
-  * _.cpp will be refactorzied soon.
+  * hsv_ransac_ver-0.cpp will be refactorzied soon.
 ---
 ## Open_YOLO Project summary
 * I will construct YOLO network in C++, to make object detector in video files.
