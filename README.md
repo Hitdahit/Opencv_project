@@ -22,11 +22,19 @@ check original img and result img.
   * caution: you may be need to edit roi function's vertices array in _.cpp, reason followed under this line.
   #### ransac malfunctions if input img contains strange object which is not road.   (but it typially works.)
   
-  * like this
+  * like these errors
+  
    ![image](https://user-images.githubusercontent.com/42925197/75437233-41618580-5999-11ea-8924-8f26efc1472b.png)
+   ![image](https://user-images.githubusercontent.com/42925197/75442945-cbaee700-59a3-11ea-829e-93762d4a1ace.png)
 
   * This program's input is still img. I will revise it so this project use video as a input.
   * hsv_ransac_ver-0.cpp will be refactorzied soon.
+  - change format to class to make code more shorter.
+  - it has two version of ransac(1차함수, 3차함수) and choose one of them by c_max value, but i will chage it soon.
+     * so among those two error, i corrected second one so far...
+     
+     ![image](https://user-images.githubusercontent.com/42925197/75443203-3eb85d80-59a4-11ea-866f-14905a56ae8b.png)
+
 ---
 ## Open_YOLO Project summary
 * I will construct YOLO network in C++, to make object detector in video files.
