@@ -25,6 +25,7 @@ check original img and result img.
   * like these errors
   
    ![image](https://user-images.githubusercontent.com/42925197/75437233-41618580-5999-11ea-8924-8f26efc1472b.png)
+   - 이건 차수조정을 못해서 생기는 에러.
    ![image](https://user-images.githubusercontent.com/42925197/75442945-cbaee700-59a3-11ea-829e-93762d4a1ace.png)
 
   * This program's input is still img. I will revise it so this project use video as a input.
