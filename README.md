@@ -22,6 +22,9 @@ check original img and result img.
   * caution: you may be need to edit roi function's vertices array in _.cpp, reason followed under this line.
   #### ransac malfunctions if input img contains strange object which is not road.   (but it typially works.)
   
+  * like this
+   ![image](https://user-images.githubusercontent.com/42925197/75437233-41618580-5999-11ea-8924-8f26efc1472b.png)
+
   * This program's input is still img. I will revise it so this project use video as a input.
   * hsv_ransac_ver-0.cpp will be refactorzied soon.
 ---
